@@ -1,0 +1,32 @@
+<div class="dialog-container">
+  <!-- Text content sits above -->
+  <div class="content">
+    <h1 class="grand-title">{{ shop.name }}</h1>
+    <h2 class="subtitle">{{ shop.vicinity }}</h2>
+    <a
+      class="directions-link"
+      [href]="getDirectionsLink(shop)"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Get Directions
+    </a>
+  </div>
+
+  <!-- Flame rating -->
+  <div class="flame-rating">
+    <span
+      *ngFor="let flame of beans; let i = index"
+      class="flame"
+      [class.active]="i < hover"
+      (click)="setRating(i + 1)"
+      (mouseenter)="hoverRating(i + 1)"
+      (mouseleave)="hoverRating(rating)"
+      >🔥</span
+    >
+  </div>
+
+  <button class="submit-btn" (click)="submitRating()" [disabled]="rating === 0">
+    Submit Rating
+  </button>
+</div>

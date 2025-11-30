@@ -1,0 +1,85 @@
+.dialog-container {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  opacity: 1;
+}
+
+.grand-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 4px 0;
+  color: #ffdd59;
+  opacity: 1;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 2px 0;
+}
+
+.flame-rating {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  font-size: 2rem;
+}
+
+.flame {
+  cursor: pointer;
+  margin: 0 4px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.flame:hover {
+  transform: scale(1.3);
+}
+
+.flame.active {
+  opacity: 1;
+}
+
+.flame:not(.active) {
+  opacity: 0.3; /* dim inactive flames */
+}
+
+.submit-btn {
+  background: #ffdd59; /* gold accent */
+  color: #222;
+  font-weight: 600;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #ffd633;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.directions-link {
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffdd59; /* accent color */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.directions-link:hover {
+  color: #ffd633;
+  text-decoration: underline;
+}
+.submit-btn:disabled {
+  background: #ccc;
+  color: #888;
+  box-shadow: none;
+}

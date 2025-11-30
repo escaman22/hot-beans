@@ -1,0 +1,28 @@
+<div class="map-header-overlay">
+  <div class="header-content">
+    <h1>Hot Beans</h1>
+    <p class="tagline">Find a shop with hot coffee and hotter people</p>
+  </div>
+</div>
+
+<google-map
+  height="100vh"
+  width="100%"
+  [center]="center"
+  [zoom]="14"
+  [options]="mapOptions"
+  [mapId]="'vashyjtsg'"
+>
+  <map-marker
+    *ngIf="userMarker"
+    [position]="userMarker.position!"
+    [title]="userMarker.title!"
+    [icon]="userMarker.icon!"
+  >
+  </map-marker>
+</google-map>
+
+<!-- Search This Area Button -->
+<button *ngIf="showSearchAreaBtn" class="search-area-btn" (click)="onSearchThisArea()">
+  Search this area
+</button>

@@ -1,0 +1,72 @@
+/* Professional header overlay */
+.map-header-overlay {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 90%;
+  background: rgba(33, 37, 41, 0.95); /* dark semi-transparent background */
+  color: #ffffff;
+  padding: 16px 24px;
+  z-index: 10;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  backdrop-filter: blur(6px); /* subtle blur for modern look */
+}
+
+/* Header title styling */
+.map-header-overlay h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffdd59; /* subtle gold accent */
+}
+
+/* Tagline styling */
+.map-header-overlay .tagline {
+  margin: 6px 0 0 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #f1f3f5;
+}
+
+/* Optional: responsive scaling */
+@media (max-width: 768px) {
+  .map-header-overlay {
+    padding: 12px 16px;
+  }
+
+  .map-header-overlay h1 {
+    font-size: 1.5rem;
+  }
+
+  .map-header-overlay .tagline {
+    font-size: 0.95rem;
+  }
+}
+.search-area-btn {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  background: rgba(33, 37, 41, 0.95); /* dark button */
+  color: #ffdd59; /* accent text */
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.search-area-btn:hover {
+  background: rgba(33, 37, 41, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}

@@ -221,7 +221,7 @@ export class CoffeeMapComponent {
       style: { backgroundColor: '#2c2c2c' },
     });
 
-    dialogRef.onClose.subscribe(async () => {
+    dialogRef!.onClose.subscribe(async () => {
       await this.getLocalReviews();
       await this.loadCoffeeShops();
     });

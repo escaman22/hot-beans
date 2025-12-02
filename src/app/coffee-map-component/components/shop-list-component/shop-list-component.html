@@ -1,0 +1,37 @@
+<!-- <div class="shop-list-container">
+  <div class="shop-card" *ngFor="let shop of shops">
+    <div class="shop-header">
+      <h2>{{ shop.name }}</h2>
+      <span class="rating" *ngIf="shop.rating">
+        <i class="pi pi-star-fill"></i>
+        {{ shop.rating }}
+      </span>
+    </div>
+
+    <div class="details">
+      <p class="address">
+        <i class="pi pi-map-marker"></i>
+        {{ shop.formatted_address || shop.vicinity }}
+      </p>
+
+      <p class="open-status" [ngClass]="shop.opening_hours?.open_now ? 'open' : 'closed'">
+        <i class="pi pi-clock"></i>
+        {{ shop.opening_hours?.open_now ? 'Open Now' : 'Closed' }}
+      </p>
+    </div>
+
+    <div class="actions">
+      <a
+        pButton
+        icon="pi pi-directions"
+        label="Directions"
+        class="direction-btn"
+        [href]="
+          'https://www.google.com/maps/search/?api=1&query=' +
+          encode(shop.name + ' ' + (shop.formatted_address || shop.vicinity))
+        "
+        target="_blank"
+      ></a>
+    </div>
+  </div>
+</div> -->

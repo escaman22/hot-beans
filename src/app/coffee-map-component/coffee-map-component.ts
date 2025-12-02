@@ -4,10 +4,13 @@ import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ShopDialogComponent } from '../shop-dialog-component/shop-dialog-component';
 import { ShopService } from '../services/shop.service';
+import { FormsModule } from '@angular/forms';
+import { SelectButton } from 'primeng/selectbutton';
+import { ShopListComponent } from './components/shop-list-component/shop-list-component';
 
 @Component({
   selector: 'app-coffee-map-component',
-  imports: [GoogleMapsModule, CommonModule],
+  imports: [GoogleMapsModule, CommonModule, FormsModule, SelectButton, ShopListComponent],
   templateUrl: './coffee-map-component.html',
   styleUrl: './coffee-map-component.css',
   providers: [DialogService],
@@ -21,6 +24,13 @@ export class CoffeeMapComponent {
   showSearchAreaBtn = false;
   reviews: any[] = [];
   shopMapping: Map<string, any> = new Map();
+
+  viewOptions = [
+    { label: 'Map', value: 'map', icon: 'pi pi-map' },
+    { label: 'List', value: 'list', icon: 'pi pi-list' },
+  ];
+  currentView: 'list' | 'map' = 'map';
+  isMapReady = false;
 
   minimalMapStyle: google.maps.MapTypeStyle[] = [
     {
@@ -65,10 +75,25 @@ export class CoffeeMapComponent {
     },
   ];
 
+  mapStyle = [
+    {
+      featureType: 'water',
+      elementType: 'geometry',
+      stylers: [{ color: '#e9e9e9' }],
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry',
+      stylers: [{ color: '#ffffff' }],
+    },
+    // ... rest of your JSON styling
+  ];
+
   mapOptions: google.maps.MapOptions = {
     clickableIcons: false,
     styles: this.minimalMapStyle,
   };
+  shops: any[] = [];
 
   constructor(
     private dialogService: DialogService,
@@ -115,7 +140,14 @@ export class CoffeeMapComponent {
         title: 'You are here',
         icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
       };
+      this.initialCenter = { ...this.center };
     });
+  }
+
+  onViewChange() {
+    if (this.currentView === 'map' && !this.isMapReady) {
+      this.isMapReady = true; // Lazy load map only once
+    }
   }
 
   ngAfterViewInit() {
@@ -130,14 +162,13 @@ export class CoffeeMapComponent {
             mapCenter.lat(),
             mapCenter.lng()
           );
-          this.showSearchAreaBtn = distance > 0.5; // in km
+          this.showSearchAreaBtn = distance > 1; // in km
         }
       });
     });
   }
 
   async loadCoffeeShops() {
-    console.log('Loading coffee shops near:', this.center);
     const { PlacesService } = (await google.maps.importLibrary(
       'places'
     )) as google.maps.PlacesLibrary;
@@ -151,10 +182,11 @@ export class CoffeeMapComponent {
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        console.log('Found coffee shops:', results);
+        this.clearMarkers();
 
         this.ngZone.run(() => {
           for (const place of results) {
+            this.shops.push(place);
             if (!place.geometry?.location) continue;
 
             const content = this.createCustomMarkerContent(place);
@@ -166,9 +198,10 @@ export class CoffeeMapComponent {
             });
 
             marker.addListener('click', () => {
-              console.log('Marker clicked:', place.name);
               this.openShopDialog(place);
             });
+            // store the marker
+            this.markers.push(marker);
           }
           // this.markers = results.map(
           //   (place) =>
@@ -186,6 +219,11 @@ export class CoffeeMapComponent {
         });
       }
     });
+  }
+
+  clearMarkers() {
+    this.markers.forEach((marker) => (marker.map = null));
+    this.markers = [];
   }
 
   // Called when user clicks "Search this area"

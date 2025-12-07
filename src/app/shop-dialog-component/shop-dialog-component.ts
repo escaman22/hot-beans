@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ShopService } from '../services/shop.service';
 
 @Component({
   selector: 'app-shop-dialog-component',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './shop-dialog-component.html',
   styleUrl: './shop-dialog-component.css',
   standalone: true,

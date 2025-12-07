@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, NgZone, ViewChild } from '@angular/core';
 import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -10,7 +10,7 @@ import { ShopListComponent } from './components/shop-list-component/shop-list-co
 
 @Component({
   selector: 'app-coffee-map-component',
-  imports: [GoogleMapsModule, CommonModule, FormsModule, SelectButton, ShopListComponent],
+  imports: [GoogleMapsModule, FormsModule, SelectButton, ShopListComponent],
   templateUrl: './coffee-map-component.html',
   styleUrl: './coffee-map-component.css',
   providers: [DialogService],

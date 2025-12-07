@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-shop-list-component',
-  imports: [CommonModule, ButtonModule],
+  imports: [ButtonModule],
   templateUrl: './shop-list-component.html',
   styleUrl: './shop-list-component.css',
   standalone: true,

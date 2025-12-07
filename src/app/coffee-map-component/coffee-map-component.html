@@ -12,17 +12,20 @@
   [zoom]="14"
   [options]="mapOptions"
   [mapId]="'6db14cf7478746c5a5f74566'"
->
-  <map-marker
-    *ngIf="userMarker"
-    [position]="userMarker.position!"
-    [title]="userMarker.title!"
-    [icon]="userMarker.icon!"
   >
-  </map-marker>
+  @if (userMarker) {
+    <map-marker
+      [position]="userMarker.position!"
+      [title]="userMarker.title!"
+      [icon]="userMarker.icon!"
+      >
+    </map-marker>
+  }
 </google-map>
 
 <!-- Search This Area Button -->
-<button *ngIf="showSearchAreaBtn" class="search-area-btn" (click)="onSearchThisArea()">
-  Search this area
-</button>
+@if (showSearchAreaBtn) {
+  <button class="search-area-btn" (click)="onSearchThisArea()">
+    Search this area
+  </button>
+}

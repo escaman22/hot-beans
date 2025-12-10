@@ -1,4 +1,3 @@
-
 import { Component, inject, NgZone, ViewChild } from '@angular/core';
 import { GoogleMap, GoogleMapsModule } from '@angular/google-maps';
 import { DialogService } from 'primeng/dynamicdialog';

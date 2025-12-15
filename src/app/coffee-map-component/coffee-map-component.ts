@@ -123,24 +123,27 @@ export class CoffeeMapComponent {
     console.log('Shop mapping:', this.shopMapping);
   }
 
-  async setUserLocation() {
-    if (!navigator.geolocation) {
-      console.warn('Geolocation unavailable. Using fallback location.');
-      this.center = { lat: 34.0549, lng: 118.2426 };
-      return;
-    }
+  async setUserLocation(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      if (!navigator.geolocation) {
+        console.warn('Geolocation unavailable. Using fallback location.');
+        this.center = { lat: 34.0549, lng: 118.2426 };
+        return;
+      }
 
-    await navigator.geolocation.getCurrentPosition(async (position) => {
-      this.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      this.userMarker = {
-        position: this.center,
-        title: 'You are here',
-        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-      };
-      this.initialCenter = { ...this.center };
+      await navigator.geolocation.getCurrentPosition(async (position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        this.userMarker = {
+          position: this.center,
+          title: 'You are here',
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+        };
+        this.initialCenter = { ...this.center };
+        resolve();
+      });
     });
   }
 
